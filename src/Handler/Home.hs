@@ -10,9 +10,9 @@ module Handler.Home where
 import Import
 
 getHomeR :: Handler Html
-getHomeR = undefined
+getHomeR = defaultLayout $ do
     [whamlet|
             <h1>
-            <a href=@{ProdutoR}>
-                CADASTRO DE PRODUTOS   
+                <a href=@{ProdutoR}>
+                    CADASTRO DE PRODUTOS   
     |]

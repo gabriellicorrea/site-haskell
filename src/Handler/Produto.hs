@@ -31,10 +31,8 @@ postProdutoR = do
     ((result, _), _) <- runFormPost formProduto
     case result of
          FormSuccess produto -> do
-            runDB $ insert produto
-            defaultLayout [whamlet|
-                Produto inserido com sucesso!!
-            |]
+            pid <- runDB $ insert produto
+            redirect (DescR pid)
          _ -> redirect HomeR
 
 getDescR :: ProdutoId -> Handler Html

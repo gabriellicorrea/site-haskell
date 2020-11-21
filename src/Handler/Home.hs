@@ -11,11 +11,14 @@ import Import
 
 getHomeR :: Handler Html
 getHomeR = defaultLayout $ do
+    toWidgetHead [hamlet|
+        <script src=@{StaticR js_ola_js}>
+    |]
     [whamlet|
             <h1>
                 Gerenciador de Tarefas
-
-            <img src=@{StaticR imgs_tarefas_jpg}>
+            <br>
+            <img src=@{StaticR imgs_tarefas_jpg}><br>
 
             <a href=@{ProdutoR}>
                 CADASTRO DE TAREFAS!!

@@ -24,6 +24,7 @@ getProdutoR :: Handler Html
 getProdutoR = do
      (formWidget, _) <- generateFormPost formProduto
      defaultLayout $ do
+        addStylesheet (StaticR css_bootstrap_css)
         toWidgetHead $(luciusFile "templates/descr.lucius")
         [whamlet|
             <form action=@{ProdutoR} method=post>

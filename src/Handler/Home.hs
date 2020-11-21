@@ -13,6 +13,10 @@ getHomeR :: Handler Html
 getHomeR = defaultLayout $ do
     [whamlet|
             <h1>
-                <a href=@{ProdutoR}>
-                    CADASTRO DE PRODUTOS!!!!!!!!!   
+                Gerenciador de Tarefas
+
+            <img src=@{StaticR imgs_tarefas_jpg}>
+
+            <a href=@{ProdutoR}>
+                CADASTRO DE TAREFAS!!
     |]

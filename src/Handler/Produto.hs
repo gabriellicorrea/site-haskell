@@ -8,17 +8,23 @@
 module Handler.Produto where
 
 import Import
+import Text.Lucius
 import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3)
 
 formProduto :: Form Produto
-formProduto = renderBootstrap3 BootstrapBasicForm $ Produto 
-    <$> areq textField "Nome: " Nothing
+formProduto = renderDivs $ Produto 
+    <$> areq textField (FieldSettings "Nome: " 
+                                        Nothing
+                                        (Just "h21")
+                                        Nothing
+                                        [("class", "minhaClasse")]) Nothing
     <*> areq doubleField "Preco: " Nothing
 
 getProdutoR :: Handler Html
 getProdutoR = do
      (formWidget, _) <- generateFormPost formProduto
      defaultLayout $ do
+        toWidgetHead $(luciusFile "templates/descr.lucius")
         [whamlet|
             <form action=@{ProdutoR} method=post>
                 ^{formWidget}
@@ -39,8 +45,4 @@ getDescR :: ProdutoId -> Handler Html
 getDescR pid = do
     produto <- runDB $ get404 pid
     defaultLayout $ do
-        [whamlet|
-                <ul>
-                    <li> Nome: #{produtoNome produto}
-                    <li> Preco: #{produtoValor produto}
-        |]
+        $(whamletFile "templates/descr.hamlet")

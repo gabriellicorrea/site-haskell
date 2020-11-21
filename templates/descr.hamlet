@@ -1,0 +1,3 @@
+<ul>
+    <li> Nome: #{produtoNome produto}
+    <li> Preco: #{produtoValor produto}

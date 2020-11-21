@@ -22,7 +22,7 @@ getProdutoR = do
         [whamlet|
             <form action=@{ProdutoR} method=post>
                 ^{formWidget}
-                <input type="submit"  value="teste">
+                <input type="submit"  value="OK">
         |]
 
 
@@ -31,10 +31,8 @@ postProdutoR = do
     ((result, _), _) <- runFormPost formProduto
     case result of
          FormSuccess produto -> do
-            runDB $ insert produto
-            defaultLayout [whamlet|
-                    <h1>produto salvo galera!aaaaaaaaaaaa  
-            |]
+            pid <- runDB $ insert produto
+            redirect (DescR pid) 
          _ -> redirect HomeR
 
 getDescR :: ProdutoId -> Handler Html

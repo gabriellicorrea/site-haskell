@@ -1,0 +1,5 @@
+Produto
+    nome Text
+    valor Double
+    deriving Show
+

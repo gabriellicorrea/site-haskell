@@ -9,3 +9,4 @@
 /produto/desc/#ProdutoId        DescR           GET
 /produtos                       ListaR          GET
 /produto/modificar/#ProdutoId   UpdProdR        GET POST
+/produto/apagar/#ProdutoId      DelProdR        POST 

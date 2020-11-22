@@ -16,3 +16,6 @@
                 <td>
                     <a href=@{UpdProdR pid}>
                             Editar
+                <td>
+                    <form action=@{DelProdR pid} method=post>
+                        <input type="submit" value="delete">

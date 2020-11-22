@@ -11,18 +11,19 @@ import Import
 import Text.Lucius
 import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3)
 
-formProduto :: Form Produto
-formProduto = renderDivs $ Produto 
+formProduto :: Maybe Produto -> Form Produto
+formProduto mp = renderDivs $ Produto 
     <$> areq textField (FieldSettings "Nome: " 
                                         Nothing
                                         (Just "h21")
                                         Nothing
-                                        [("class", "minhaClasse")]) Nothing
-    <*> areq doubleField "Preco: " Nothing
+                                        [("class", "minhaClasse")]) 
+                                        (fmap produtoNome mp)
+    <*> areq doubleField "Preco: " (fmap produtoValor mp)
 
-getProdutoR :: Handler Html
-getProdutoR = do
-     (formWidget, _) <- generateFormPost formProduto
+auxProdutoR :: Route App -> Maybe Produto -> Handler Html
+auxProdutoR rt mp = do
+     (formWidget, _) <- generateFormPost (formProduto mp)
      defaultLayout $ do
         addStylesheet (StaticR css_bootstrap_css)
         toWidgetHead $(luciusFile "templates/descr.lucius")
@@ -33,9 +34,13 @@ getProdutoR = do
         |]
 
 
+getProdutoR :: Handler Html
+getProdutoR = auxProdutoR ProdutoR Nothing
+
+
 postProdutoR :: Handler Html
 postProdutoR = do
-    ((result, _), _) <- runFormPost formProduto
+    ((result, _), _) <- runFormPost (formProduto Nothing)
     case result of
          FormSuccess produto -> do
             pid <- runDB $ insert produto
@@ -54,3 +59,19 @@ getListaR = do
     produtos <- runDB $ selectList [] [Desc ProdutoValor]
     defaultLayout $ do
         $(whamletFile "templates/listar.hamlet")
+
+
+getUpdProdR :: ProdutoId -> Handler Html
+getUpdProdR pid = do
+    antigo <- runDB $ get404 pid
+    auxProdutoR (UpdProdR pid) (Just antigo)
+
+-- update from produto where id  pid set ...
+postUpdProdR :: ProdutoId -> Handler Html
+postUpdProdR pid = do
+    ((result, _), _) <- runFormPost (formProduto Nothing)
+    case result of
+         FormSuccess produto -> do
+            pid <- runDB $ replace pid produto
+            redirect ListaR 
+         _ -> redirect HomeR

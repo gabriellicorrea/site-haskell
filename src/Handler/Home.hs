@@ -20,6 +20,11 @@ getHomeR = defaultLayout $ do
             <br>
             <img src=@{StaticR imgs_tarefas_jpg}><br>
 
-            <a href=@{ProdutoR}>
-                CADASTRO DE TAREFAS!!
+            <ul>
+                <li>
+                    <a href=@{ProdutoR}>
+                        CADASTRO DE TAREFAS
+                <li>
+                    <a href=@{ListaR}>
+                        LISTAGEM DE TAREFAS
     |]

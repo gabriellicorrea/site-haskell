@@ -5,6 +5,7 @@
 
 / HomeR GET 
 
-/produto                    ProdutoR        GET POST
-/produto/desc/#ProdutoId    DescR           GET
-/produtos                   ListaR          GET
+/produto                        ProdutoR        GET POST
+/produto/desc/#ProdutoId        DescR           GET
+/produtos                       ListaR          GET
+/produto/modificar/#ProdutoId   UpdProdR        GET POST

@@ -7,3 +7,4 @@
 
 /produto                    ProdutoR        GET POST
 /produto/desc/#ProdutoId    DescR           GET
+/produtos                   ListaR          GET

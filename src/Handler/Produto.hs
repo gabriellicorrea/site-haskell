@@ -47,3 +47,10 @@ getDescR pid = do
     produto <- runDB $ get404 pid
     defaultLayout $ do
         $(whamletFile "templates/descr.hamlet")
+
+
+getListaR :: Handler Html
+getListaR = do
+    produtos <- runDB $ selectList [] [Desc ProdutoValor]
+    defaultLayout $ do
+        $(whamletFile "templates/listar.hamlet")

@@ -1,0 +1,13 @@
+<table>
+    <tread>
+        <tr>
+            Nome
+        <tr>
+            Valor
+    <tbody>
+        $forall Entity pid produto <- produtos
+            <tr>
+                <td>
+                    #{produtoNome produto}
+                <td>
+                    #{produtoValor produto}

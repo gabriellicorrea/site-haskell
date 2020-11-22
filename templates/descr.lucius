@@ -1,3 +1,7 @@
 .minhaClasse{
     background-color: yellow;
 }
+
+.body{
+    background-color:red;
+}

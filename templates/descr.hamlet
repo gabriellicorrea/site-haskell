@@ -1,3 +1,9 @@
 <ul>
     <li> Nome: #{produtoNome produto}
     <li> Preco: #{produtoValor produto}
+    <li>
+        <a href=@{ListaR}>
+            LISTAGEM DE TAREFAS
+
+
+     

@@ -5,6 +5,7 @@
         <tr>
             Valor
         <tr>
+        <tr>
 
     <tbody>
         $forall Entity pid produto <- produtos
@@ -19,3 +20,6 @@
                 <td>
                     <form action=@{DelProdR pid} method=post>
                         <input type="submit" value="delete">
+                <td>
+                    <a href=@{HomeR}>
+                            Home

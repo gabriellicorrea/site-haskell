@@ -14,18 +14,26 @@ getHomeR = defaultLayout $ do
     toWidgetHead [hamlet|
         <script src=@{StaticR js_ola_js}>
     |]
+    sess <- lookupSession "_ID"
     [whamlet|
-            <h1>
-                Gerenciador de Tarefas
-            <br>
-            <img src=@{StaticR imgs_tarefas_jpg}><br>
+        <h1>
+            Gerenciador de Tarefas
+        <br>
+        <img src=@{StaticR imgs_tarefas_jpg}><br>
 
-            <ul>
+        <ul>
                 <li>
                     <a href=@{ProdutoR}>
-                        CADASTRO DE TAREFAS
-                    <br>
+                        CADASTRO DE TAREFAS  
+            $maybe sessao <- sess
                 <li>
                     <a href=@{ListaR}>
                         LISTAGEM DE TAREFAS
+                <li>
+                    <form action=@{LogoutR} method=post>
+                        <input type="submit" value="Logout">
+            $nothing
+                <li>
+                    <a href=@{LoginR}>
+                        Entrar
     |]

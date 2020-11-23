@@ -12,3 +12,5 @@
 /produto/apagar/#ProdutoId      DelProdR        POST 
 
 /usuario                        UsuarioR        GET POST
+/login                          LoginR          GET POST
+/Logout                         LogoutR         POST

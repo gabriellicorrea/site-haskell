@@ -1,9 +1,18 @@
 <ul>
     <li> Nome: #{produtoNome produto}
     <li> Preco: #{produtoValor produto}
+    
+    <form action=@{ComprarR pid} method="post">
+        ^{widget}
+        <input type="submit" value="Compra">
+    
+    
+    
     <li>
         <a href=@{ListaR}>
             LISTAGEM DE TAREFAS
+
+    
 
 
      

@@ -47,9 +47,13 @@ postProdutoR = do
             redirect (DescR pid) 
          _ -> redirect HomeR
 
+formQt :: Form Int
+formQt = renderBootstrap3 BootstrapBasicForm (areq intField "Quantidade" (Just 1))
+
 getDescR :: ProdutoId -> Handler Html
 getDescR pid = do
     produto <- runDB $ get404 pid
+    (widget, _) <- generateFormPost formQt
     defaultLayout $ do
         $(whamletFile "templates/descr.hamlet")
 

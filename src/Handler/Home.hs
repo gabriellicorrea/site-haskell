@@ -9,6 +9,15 @@ module Handler.Home where
 
 import Import
 
+--getAdminR :: Handler Html
+--getAdminR = do 
+--   defaultLayout $ do
+--        [whamlet|
+--            <h1>
+--                Bem vindo admin!     
+--        |]
+
+
 getHomeR :: Handler Html
 getHomeR = defaultLayout $ do
     toWidgetHead [hamlet|

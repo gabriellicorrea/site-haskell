@@ -14,3 +14,6 @@
 /usuario                        UsuarioR        GET POST
 /login                          LoginR          GET POST
 /Logout                         LogoutR         POST
+--/admin                        AdminR          GET    
+/compra/#ProdutoId/efetuar      ComprarR        POST
+/carrinho                       ListComprarR    GET

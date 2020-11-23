@@ -3,6 +3,12 @@ Produto
     valor Double
     deriving Show
 
+Compra
+    produtoid ProdutoId
+    usuarioid UsuarioId
+    qtunit Int
+    deriving Show
+
 Usuario
     email Text
     senha Text

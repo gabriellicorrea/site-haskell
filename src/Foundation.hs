@@ -25,6 +25,15 @@ mkYesodData "App" $(parseRoutesFile "config/routes.yesodroutes")
 
 instance Yesod App where
     makeLogger = return . appLogger
+
+--    authRoute _ = Just LoginR
+    
+--  isAutorized HomeR _ = return Autorized
+--    isAutorized LoginR _ = return Autorized
+--    isAutorized ProdutoR _ = return Autorized
+--    isAutorized AdminR _ = return Autorized
+--    isAutorized _ _ = isUsuario
+
     defaultLayout contents = do
         PageContent title headTags bodyTags <- widgetToPageContent contents
         mmsg <- getMessage
@@ -41,6 +50,21 @@ instance Yesod App where
                         <div class="container">
                     ^{bodyTags}
         |]
+
+isAdmin :: Handler AuthResult
+isAdmin = do 
+    sess <- lookupSession "_ID"
+    case sess of 
+        Nothing -> return AuthenticationRequired
+        Just "admin" -> return Authorized
+        Just _ -> return $ Unauthorized "VC EH USUARIO COMUM"
+
+isUsuario :: Handler AuthResult
+isUsuario = do 
+    sess <- lookupSession "_ID"
+    case sess of 
+        Nothing -> return AuthenticationRequired
+        Just _ -> return Authorized
 
 instance YesodPersist App where
     type YesodPersistBackend App = SqlBackend

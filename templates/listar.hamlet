@@ -12,7 +12,7 @@
             <tr>
                 <td>
                     <a href=@{DescR pid}>
-                    #{produtoNome produto}
+                        #{produtoNome produto}
                 <td>
                     #{produtoValor produto}
                 <td>

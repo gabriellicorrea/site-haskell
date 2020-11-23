@@ -31,9 +31,6 @@ getHomeR = defaultLayout $ do
         <img src=@{StaticR imgs_tarefas_jpg}><br>
 
         <ul>
-                <li>
-                    <a href=@{ProdutoR}>
-                        CADASTRO DE TAREFAS  
             $maybe sessao <- sess
                 <li>
                     <a href=@{ListaR}>

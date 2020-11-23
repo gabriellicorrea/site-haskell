@@ -10,7 +10,7 @@ module Handler.Produto where
 import Import
 import Text.Lucius
 import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3)
-
+import Tools
 formProduto :: Maybe Produto -> Form Produto
 formProduto mp = renderDivs $ Produto 
     <$> areq textField (FieldSettings "Nome: " 
@@ -47,8 +47,6 @@ postProdutoR = do
             redirect (DescR pid) 
          _ -> redirect HomeR
 
-formQt :: Form Int
-formQt = renderBootstrap3 BootstrapBasicForm (areq intField "Quantidade" (Just 1))
 
 getDescR :: ProdutoId -> Handler Html
 getDescR pid = do

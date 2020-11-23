@@ -19,23 +19,21 @@ getListComprarR = do
         Just email -> do
             usu <- runDB $ getBy (UniqueEmail email)
             case usu of 
-                 Nothing -> redirect HomeR
-                 Just (Entity uid usuario) -> do    
-                     let sql = "SELECT ??,??,??" FROM usuario \ 
-                        \ INNER JOIN compra ON compra.usuarioid = usuario.id \
-                        \ INNER JOIN produto ON compra.produtoid = produto.id \
-                        \ WHERE usuario.id = ?"
-                      produtos <- runDB $ rawSql sql [toPersistValue uid] :: 
-                      Handler [(Entity Usuario,Entity Compra,Entity Produto)]
-                      defaultLayout $ do
+                Nothing -> redirect HomeR
+                Just (Entity uid usuario) -> do    
+                    let sql = "SELECT ??,??,?? FROM usuario INNER JOIN compra ON compra.usuarioid = usuario.id INNER JOIN produto ON compra.produtoid = produto.id WHERE usuario.id = ?"
+                    produtos <- runDB $ rawSql sql [toPersistValue uid] :: Handler [(Entity Usuario, Entity Compra, Entity Produto)]
+                    defaultLayout $ do
                         [whamlet|
                             <h1>
-                                Compras de #{usuarioNome usuario}
+                                COMPRAS de #{usuarioEmail usuario}
                             <ul>
-                            $forall {Entity _ _ , Entity _ compra, Entity _ produto} <- produtos
+                                $forall (Entity _ _, Entity _ compra, Entity _ produto) <- produtos
                                     <li>
-                                        #{produtoNome produto}: #{produtoValor produto * (formIntegral (compraQtunit compra))}
+                                        #{produtoNome produto}: #{produtoValor produto * (fromIntegral (compraQtunit compra))}
+                                
                         |]
+
 
 postComprarR :: ProdutoId -> Handler Html
 postComprarR pid = do
@@ -45,12 +43,12 @@ postComprarR pid = do
             sess <- lookupSession "_ID"
             case sess of    
                 Nothing -> redirect HomeR
-                Just  Email -> do
+                Just email -> do
                     usuario <- runDB $ getBy(UniqueEmail email)
                     case usuario of 
                          Nothing -> redirect HomeR
                          Just (Entity uid _) -> do
-                              runDB $ insert (Compra uid pid qt)
+                              runDB $ insert (Compra pid uid qt)
                               redirect ListComprarR
         _-> redirect HomeR
 

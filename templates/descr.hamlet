@@ -4,7 +4,7 @@
     
     <form action=@{ComprarR pid} method="post">
         ^{widget}
-        <input type="submit" value="Compra">
+        <input .input type="submit" value="Compra">
     
     
     

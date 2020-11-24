@@ -11,7 +11,7 @@
         $forall Entity pid produto <- produtos
             <tr>
                 <td>
-                    <a href=@{DescR pid}>
+                    <a .nomeColorido href=@{DescR pid}>
                         #{produtoNome produto}
                 <td>
                     #{produtoValor produto}

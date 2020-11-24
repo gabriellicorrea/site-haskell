@@ -60,7 +60,9 @@ getListaR :: Handler Html
 getListaR = do
     produtos <- runDB $ selectList [] [Desc ProdutoValor]
     defaultLayout $ do
-        $(whamletFile "templates/listar.hamlet")
+        toWidgetHead $(luciusFile "templates/listar.lucius")
+        $(whamletFile "templates/listar.hamlet")    
+        
 
 
 getUpdProdR :: ProdutoId -> Handler Html

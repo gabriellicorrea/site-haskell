@@ -1,0 +1,18 @@
+<ul>
+    <li> Nome: #{tarefaNome tarefa}
+    <li> Preco: #{tarefaDescricao tarefa}
+    
+    <form action=@{NewTarefaR pid} method="post">
+        ^{widget}
+        <input type="submit" value="OK">
+    
+    
+    
+    <li>
+        <a href=@{HomeR}>
+            Home
+
+    
+
+
+     

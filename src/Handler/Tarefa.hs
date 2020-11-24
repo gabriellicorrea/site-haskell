@@ -8,32 +8,44 @@
 module Handler.Tarefa where
 
 import Import
-import Text.Lucius
 import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3)
-import Tools
 
+formTarefa :: Form Tarefa 
+formTarefa = renderBootstrap3 BootstrapBasicForm $ Tarefa
+    <$> areq textField "Nome: " Nothing
+    <*> areq textField "Descricao: " Nothing
+
+   
 getTarefaR :: Handler Html
-getTarefaR = defaultLayout $ do
-    toWidgetHead [hamlet|
-        <script src=@{StaticR js_ola_js}>
-    |]
-    sess <- lookupSession "_ID"
-    [whamlet|
-        <h1>
-            Gerenciador de Tarefas
-        <br>
-        <img src=@{StaticR imgs_tarefas_jpg}><br>
+getTarefaR = do
+     (formWidget, _) <- generateFormPost formTarefa
+     defaultLayout $ do
+        [whamlet|
+            <form action=@{TarefaR} method=post>
+                ^{formWidget}
+                <input type="submit"  value="OK">
+        |]
 
-        <ul>
-            $maybe sessao <- sess
-                <li>
-                    <a href=@{ListaR}>
-                        LISTAGEM DE TAREFAS!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                <li>
-                    <form action=@{LogoutR} method=post>
-                        <input type="submit" value="Logout">
-            $nothing
-                <li>
-                    <a href=@{LoginR}>
-                        Entrar
-    |]
+
+postTarefaR :: Handler Html
+postTarefaR = do
+    ((result, _), _) <- runFormPost formTarefa
+    case result of
+         FormSuccess tarefa -> do
+            pid <- runDB $ insert tarefa
+            redirect (DesctaR pid)
+            runDB $ insert tarefa
+            defaultLayout [whamlet|
+                    <h1>tarefa salva galera!aaaaaaaaaaaa  
+            |]
+         _ -> redirect HomeR
+
+getDesctaR :: TarefaId -> Handler Html
+getDesctaR pid = do
+    tarefa <- runDB $ get404 pid
+    defaultLayout $ do
+        [whamlet|
+            <ul>
+                <li> Nome: #{tarefaNome tarefa}
+                <li> Descricao: #{tarefaDescricao tarefa}
+        |]

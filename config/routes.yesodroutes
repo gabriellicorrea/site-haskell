@@ -17,3 +17,7 @@
 --/admin                        AdminR          GET    
 /compra/#ProdutoId/efetuar      ComprarR        POST
 /carrinho                       ListComprarR    GET
+
+
+/tarefa                         TarefaR         GET 
+

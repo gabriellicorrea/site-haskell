@@ -13,8 +13,19 @@ import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3)
 
 formLogin :: Form Usuario
 formLogin = renderBootstrap3 BootstrapBasicForm $ Usuario
-            <$> areq emailField "Email: " Nothing
-            <*> areq passwordField "Senha: " Nothing
+            <$> areq emailField (FieldSettings "Email: " 
+                                        Nothing
+                                        (Just "h21")
+                                        Nothing
+                                        [("class", "form-control")]) 
+                                        Nothing
+            
+            <*> areq passwordField  (FieldSettings "Senha: " 
+                                        Nothing
+                                        (Just "h21")
+                                        Nothing
+                                        [("class", "form-control")]) 
+                                        Nothing
 
 getLoginR :: Handler Html
 getLoginR = do
@@ -24,11 +35,13 @@ getLoginR = do
         addStylesheet (StaticR css_bootstrap_css)
         [whamlet|
             <div>
+
                 $maybe msg <- mensagem 
                     ^{msg}
-            <form action=@{LoginR} method=post>
+            <form action=@{LoginR} method=post class="form-signin">
+                <h2 class="form-signin-heading">Por favor, faça login
                 ^{formWidget}
-                <input type="submit"  value="Entrar">
+                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Entrar">
         |]
 
 

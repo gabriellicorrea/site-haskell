@@ -26,14 +26,6 @@ mkYesodData "App" $(parseRoutesFile "config/routes.yesodroutes")
 instance Yesod App where
     makeLogger = return . appLogger
 
---    authRoute _ = Just LoginR
-    
---  isAutorized HomeR _ = return Autorized
---    isAutorized LoginR _ = return Autorized
---    isAutorized ProdutoR _ = return Autorized
---    isAutorized AdminR _ = return Autorized
---    isAutorized _ _ = isUsuario
-
     defaultLayout contents = do
         PageContent title headTags bodyTags <- widgetToPageContent contents
         mmsg <- getMessage
@@ -42,13 +34,19 @@ instance Yesod App where
 
             <html>
                 <head>
+                    <meta charset="utf-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                    <meta name="description" content="Site desenvolvido para a matéria de Tópicos Especiais">
+                    <meta name="author" content="Bianca D., Eliude A., Gabrielli C.">
+
                     <title>#{title}
                     ^{headTags}
                 <body>
                     $maybe msg <- mmsg
                         <div #message>#{msg}
-                        <div class="container">
-                    ^{bodyTags}
+                    <div class="container">
+                        ^{bodyTags}
         |]
 
 isAdmin :: Handler AuthResult

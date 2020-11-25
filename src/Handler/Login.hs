@@ -32,16 +32,24 @@ getLoginR = do
      (formWidget, _) <- generateFormPost formLogin
      mensagem <- getMessage
      defaultLayout $ do
-        addStylesheet (StaticR css_bootstrap_css)
+        setTitle "Nova tarefa - Login"
+        addStylesheet (StaticR css_bootstrapmin_css)
+        addStylesheet (StaticR css_styles_css)
         [whamlet|
             <div>
+               
+            <img src=@{StaticR imgs_NovaTarefa_png} class="img-logo">
+            <form action=@{LoginR} method=post class="form-signin">
                 $maybe msg <- mensagem 
                     ^{msg}
-           <img src=@{StaticR imgs_NovaTarefa_png}><br>
-            <form action=@{LoginR} method=post class="form-signin">
-                <h2 class="form-signin-heading">Por favor, faça login
+                <h1 hidden>Login
                 ^{formWidget}
                 <input type="submit" class="btn btn-lg btn-primary btn-block" value="Entrar">
+
+            <p class="text-center text-muted">
+                ou
+            <a href=@{UsuarioR} class="text-center font-weight-bold w-100 form-sigin-link">
+                Cadastre-se
         |]
 
 
@@ -61,14 +69,14 @@ postLoginR = do
                         redirect HomeR
                     else do
                         setMessage [shamlet|
-                            <h1>
-                                Senha Invalida
+                            <div class="alert alert-danger" role="alert">
+                                Senha Inválida
                         |]
                         redirect LoginR
                  Nothing -> do
                     setMessage [shamlet|
-                        <h1>
-                            Usuario nao encontrado
+                        <div class="alert alert-danger" role="alert">
+                            Usuário não encontrado
                     |]
                     redirect LoginR
          _ -> redirect HomeR

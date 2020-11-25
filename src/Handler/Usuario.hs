@@ -14,24 +14,47 @@ import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3)
 formUsuario :: Form (Usuario, Text)
 formUsuario = renderBootstrap3 BootstrapBasicForm $ (,) 
     <$> (Usuario 
-            <$> areq emailField "Email: " Nothing
-            <*> areq passwordField "Senha: " Nothing
+            <$> areq emailField (FieldSettings "Email: " 
+                                        Nothing
+                                        (Just "h21")
+                                        Nothing
+                                        [("class", "form-control")]) 
+                                        Nothing
+            <*> areq passwordField (FieldSettings "Senha: " 
+                                        Nothing
+                                        (Just "h21")
+                                        Nothing
+                                        [("class", "form-control")]) 
+                                        Nothing
         )
-    <*> areq passwordField "Confirmacao: " Nothing
+    <*> areq passwordField (FieldSettings "Confirmar senha: " 
+                                        Nothing
+                                        (Just "h21")
+                                        Nothing
+                                        [("class", "form-control")]) 
+                                        Nothing
 
 getUsuarioR :: Handler Html
 getUsuarioR = do
      (formWidget, _) <- generateFormPost formUsuario
      mensagem <- getMessage
      defaultLayout $ do
-        addStylesheet (StaticR css_bootstrap_css)
+        setTitle "Nova tarefa - cadastro"
+        addStylesheet (StaticR css_bootstrapmin_css)
+        addStylesheet (StaticR css_styles_css)
         [whamlet|
             <div>
                 $maybe msg <- mensagem 
                     ^{msg}
-            <form action=@{UsuarioR} method=post>
+            <img src=@{StaticR imgs_NovaTarefa_png} class="img-logo">      
+            <form action=@{UsuarioR} method=post class="form-signin">
                 ^{formWidget}
-                <input type="submit"  value="CADASTRAR">
+                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Cadastrar">
+            
+            <p class="text-center text-muted">
+                ou
+            <a href=@{LoginR} class="text-center font-weight-bold w-100 form-sigin-link">
+                Entrar
         |]
 
 

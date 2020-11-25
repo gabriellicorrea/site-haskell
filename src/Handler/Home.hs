@@ -28,7 +28,7 @@ getHomeR = defaultLayout $ do
         <h1>
             Gerenciador de Tarefas
         <br>
-        <img src=@{StaticR imgs_tarefas_jpg}><br>
+        <img src=@{StaticR imgs_NovaTarefa_png}><br>
 
         <ul>
             $maybe sessao <- sess

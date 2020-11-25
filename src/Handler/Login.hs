@@ -35,9 +35,9 @@ getLoginR = do
         addStylesheet (StaticR css_bootstrap_css)
         [whamlet|
             <div>
-
                 $maybe msg <- mensagem 
                     ^{msg}
+           <img src=@{StaticR imgs_NovaTarefa_png}><br>
             <form action=@{LoginR} method=post class="form-signin">
                 <h2 class="form-signin-heading">Por favor, faça login
                 ^{formWidget}

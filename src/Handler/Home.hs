@@ -20,6 +20,10 @@ import Import
 
 getHomeR :: Handler Html
 getHomeR = defaultLayout $ do
+    setTitle "Nova tarefa - Cadastre suas tarefas"
+    addStylesheet (StaticR css_bootstrapmin_css)
+    addStylesheet (StaticR css_styles_css)
+    addScriptRemote "https://code.jquery.com/jquery-3.5.1.slim.min.js"
     toWidgetHead [hamlet|
         <script src=@{StaticR js_ola_js}>
     |]
@@ -32,21 +36,25 @@ getHomeR = defaultLayout $ do
 
         <ul>
             $maybe sessao <- sess
-                <li>
-                    <a href=@{ProdutoR}>
-                        Minha lista do supermecado
-                <li>
-                    <a href=@{ListaR}>
-                        Minha Lista de compras
-                <li>
-                    <a href=@{TarefaR}>
-                        Cadastrar uma nova tarefa
-                <li>
-                    <a href=@{ListaTaR}>
-                        Minha Lista de Tarefas
-                <li>
-                    <form action=@{LogoutR} method=post>
-                        <input type="submit" value="Logout">
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="active">
+                        <a href=@{HomeR}>
+                            Home
+                    <li role="presentation">
+                        <a href=@{ProdutoR}>
+                            Lista do supermecado
+                    <li role="presentation">
+                        <a href=@{ListaR}>
+                            Lista de compras
+                    <li role="presentation">
+                        <a href=@{TarefaR}>
+                            Cadastrar nova tarefa
+                    <li role="presentation">
+                        <a href=@{ListaTaR}>
+                            Minhas tarefas
+                    <li role="presentation">
+                        <form action=@{LogoutR} method=post>
+                            <input type="submit" value="Logout">
             $nothing
                 <li>
                     <a href=@{UsuarioR}>

@@ -1,0 +1,8 @@
+.nomeColorido{
+    color: red;
+}
+
+
+body{
+    background-color: white;
+}

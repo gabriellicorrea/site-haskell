@@ -3,23 +3,23 @@
         <tr>
             Nome
         <tr>
-            Valor
+            Descricao
         <tr>
         <tr>
 
     <tbody>
-        $forall Entity pid produto <- produtos
+        $forall Entity pid categoria <- categorias
             <tr>
                 <td>
-                    <a .nomeColorido href=@{DescR pid}>
-                        #{produtoNome produto}
+                    <a .nomeColorido href=@{DescCatR pid}>
+                        #{categoriaNome categoria}
                 <td>
-                    #{produtoValor produto}
+                    #{categoriaDescricao categoria}
                 <td>
-                    <a href=@{UpdProdR pid}>
+                    <a href=@{UpdCatR pid}>
                             Editar
                 <td>
-                    <form action=@{DelProdR pid} method=post>
+                    <form action=@{DelCatR pid} method=post>
                         <input type="submit" value="delete">
                 <td>
                     <a href=@{HomeR}>

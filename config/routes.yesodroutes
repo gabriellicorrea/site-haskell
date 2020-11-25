@@ -11,13 +11,23 @@
 /produto/modificar/#ProdutoId   UpdProdR        GET POST
 /produto/apagar/#ProdutoId      DelProdR        POST 
 
+
 /usuario                        UsuarioR        GET POST
 /login                          LoginR          GET POST
 /Logout                         LogoutR         POST
---/admin                        AdminR          GET    
+-- /admin                        AdminR         GET    
 /compra/#ProdutoId/efetuar      ComprarR        POST
 /carrinho                       ListComprarR    GET
 
 
-/tarefa                         TarefaR         GET 
+/tarefa                         TarefaR         GET  POST
+/tarefa/desc/#TarefaId          DesctaR         GET
+/tarefas                        ListaTaR        GET
+/tarefa/editar/#TarefaId        UpdTarR         GET  POST
+/tarefa/apagar/#TarefaId        DelTarR         POST
 
+/categoria                      CategoriaR      GET  POST
+/categoria/desc/#CategoriaId    DescCatR        GET
+/categorias                     ListaCatR       GET
+/categoria/editar/#CategoriaId  UpdCatR         GET  POST
+/categoria/apagar/#CategoriaId  DelCatR         POST

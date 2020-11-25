@@ -15,4 +15,12 @@ Usuario
     UniqueEmail email
     deriving Show
 
+Tarefa
+    nome Text
+    descricao Text
+    deriving Show
 
+Categoria
+    nome Text
+    descricao Text
+    deriving Show

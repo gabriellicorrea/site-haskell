@@ -1,0 +1,11 @@
+<ul>
+    <li> Nome da tarefa: #{tarefaNome tarefa}
+    <li> Descricao: #{tarefaDescricao tarefa}    
+    <li>
+        <a href=@{ListaTaR}>
+            Suas Tarefas!!
+
+    
+
+
+     

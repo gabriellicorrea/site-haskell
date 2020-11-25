@@ -28,6 +28,7 @@ auxProdutoR rt mp = do
         addStylesheet (StaticR css_bootstrap_css)
         toWidgetHead $(luciusFile "templates/descr.lucius")
         [whamlet|
+        
             <form action=@{rt} method=post>
                 ^{formWidget}
                 <input type="submit"  value="OK">
@@ -60,7 +61,9 @@ getListaR :: Handler Html
 getListaR = do
     produtos <- runDB $ selectList [] [Desc ProdutoValor]
     defaultLayout $ do
-        $(whamletFile "templates/listar.hamlet")
+        toWidgetHead $(luciusFile "templates/listar.lucius")
+        $(whamletFile "templates/listar.hamlet")    
+        
 
 
 getUpdProdR :: ProdutoId -> Handler Html
@@ -68,7 +71,6 @@ getUpdProdR pid = do
     antigo <- runDB $ get404 pid
     auxProdutoR (UpdProdR pid) (Just antigo)
 
--- update from produto where id  pid set ...
 postUpdProdR :: ProdutoId -> Handler Html
 postUpdProdR pid = do
     ((result, _), _) <- runFormPost (formProduto Nothing)

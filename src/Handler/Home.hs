@@ -33,13 +33,26 @@ getHomeR = defaultLayout $ do
         <ul>
             $maybe sessao <- sess
                 <li>
+                    <a href=@{ProdutoR}>
+                        Minha lista do supermecado
+                <li>
                     <a href=@{ListaR}>
-                        LISTAGEM DE TAREFAS
+                        Minha Lista de compras
+                <li>
+                    <a href=@{TarefaR}>
+                        Cadastrar uma nova tarefa
+                <li>
+                    <a href=@{ListaTaR}>
+                        Minha Lista de Tarefas
                 <li>
                     <form action=@{LogoutR} method=post>
                         <input type="submit" value="Logout">
             $nothing
                 <li>
+                    <a href=@{UsuarioR}>
+                        Cadastrar
+                <li>
                     <a href=@{LoginR}>
                         Entrar
+                
     |]

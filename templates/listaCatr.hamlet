@@ -1,0 +1,26 @@
+<table>
+    <tread>
+        <tr>
+            Nome
+        <tr>
+            Descricao
+        <tr>
+        <tr>
+
+    <tbody>
+        $forall Entity pid categoria <- categorias
+            <tr>
+                <td>
+                    <a .nomeColorido href=@{DescCatR pid}>
+                        #{categoriaNome categoria}
+                <td>
+                    #{categoriaDescricao categoria}
+                <td>
+                    <a href=@{UpdCatR pid}>
+                            Editar
+                <td>
+                    <form action=@{DelCatR pid} method=post>
+                        <input type="submit" value="delete">
+                <td>
+                    <a href=@{HomeR}>
+                            Home

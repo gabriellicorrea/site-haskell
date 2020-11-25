@@ -28,6 +28,7 @@ auxProdutoR rt mp = do
         addStylesheet (StaticR css_bootstrap_css)
         toWidgetHead $(luciusFile "templates/descr.lucius")
         [whamlet|
+        
             <form action=@{rt} method=post>
                 ^{formWidget}
                 <input type="submit"  value="OK">

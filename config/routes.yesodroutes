@@ -25,3 +25,9 @@
 /tarefas                        ListaTaR        GET
 /tarefa/editar/#TarefaId        UpdTarR         GET  POST
 /tarefa/apagar/#TarefaId        DelTarR         POST
+
+/categoria                      CategoriaR      GET  POST
+/categoria/desc/#CategoriaId    DescCatR        GET
+/categorias                     ListaCatR       GET
+/categoria/editar/#CategoriaId  UpdCatR         GET  POST
+/categoria/apagar/#CategoriaId  DelCatR         POST

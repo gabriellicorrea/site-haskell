@@ -1,0 +1,11 @@
+<ul>
+    <li> Nome da categoria: #{categoriaNome categoria}
+    <li> Descricao: #{categoriaDescricao categoria}    
+    <li>
+        <a href=@{ListaCatR}>
+            Suas categorias
+
+    
+
+
+     

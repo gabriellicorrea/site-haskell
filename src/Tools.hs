@@ -18,3 +18,4 @@ import Import
 
 formQt :: Form Int
 formQt = renderDivs (areq intField "Quantidade" (Just 1))
+

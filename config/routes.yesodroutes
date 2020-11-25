@@ -22,3 +22,6 @@
 
 /tarefa                         TarefaR         GET  POST
 /tarefa/desc/#TarefaId          DesctaR         GET
+/tarefas                        ListaTaR        GET
+/tarefa/editar/#TarefaId        UpdTarR         GET  POST
+/tarefa/apagar/#TarefaId        DelTarR         POST

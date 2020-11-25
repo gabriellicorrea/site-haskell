@@ -8,28 +8,34 @@
 module Handler.Tarefa where
 
 import Import
+import Text.Lucius
 import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3)
 
-formTarefa :: Form Tarefa 
-formTarefa = renderBootstrap3 BootstrapBasicForm $ Tarefa
-    <$> areq textField "Nome: " Nothing
-    <*> areq textField "Descricao: " Nothing
+formTarefa :: Maybe Tarefa -> Form Tarefa 
+formTarefa mp = renderBootstrap3 BootstrapBasicForm $ Tarefa 
+    <$> areq textField  "Nome: " (fmap tarefaNome mp)
+    <*> areq textField "Descricao: " (fmap tarefaDescricao mp)
 
-   
-getTarefaR :: Handler Html
-getTarefaR = do
-     (formWidget, _) <- generateFormPost formTarefa
+
+auxTarefaR :: Route App -> Maybe Tarefa -> Handler Html
+auxTarefaR rt mp = do
+     (formWidget, _) <- generateFormPost (formTarefa mp)
      defaultLayout $ do
+        addStylesheet (StaticR css_bootstrap_css)
+        toWidgetHead $(luciusFile "templates/descr.lucius")
         [whamlet|
-            <form action=@{TarefaR} method=post>
+            <form action=@{rt} method=post>
                 ^{formWidget}
                 <input type="submit"  value="OK">
         |]
 
+   
+getTarefaR :: Handler Html
+getTarefaR = auxTarefaR TarefaR Nothing
 
 postTarefaR :: Handler Html
 postTarefaR = do
-    ((result, _), _) <- runFormPost formTarefa
+    ((result, _), _) <- runFormPost (formTarefa Nothing)
     case result of
          FormSuccess tarefa -> do
             pid <- runDB $ insert tarefa
@@ -44,8 +50,30 @@ getDesctaR :: TarefaId -> Handler Html
 getDesctaR pid = do
     tarefa <- runDB $ get404 pid
     defaultLayout $ do
-        [whamlet|
-            <ul>
-                <li> Nome: #{tarefaNome tarefa}
-                <li> Descricao: #{tarefaDescricao tarefa}
-        |]
+        $(whamletFile "templates/desctar.hamlet")
+        
+getListaTaR :: Handler Html
+getListaTaR = do
+    tarefas <- runDB $ selectList [] [Desc TarefaDescricao]
+    defaultLayout $ do
+        $(whamletFile "templates/listaTar.hamlet") 
+
+
+getUpdTarR :: TarefaId -> Handler Html
+getUpdTarR pid = do
+    antigo <- runDB $ get404 pid
+    auxTarefaR (UpdTarR pid) (Just antigo)
+
+postUpdTarR :: TarefaId -> Handler Html
+postUpdTarR pid = do
+    ((result, _), _) <- runFormPost (formTarefa Nothing)
+    case result of
+         FormSuccess tarefa -> do
+            pid <- runDB $ replace pid tarefa
+            redirect ListaTaR 
+         _ -> redirect HomeR
+
+postDelTarR :: TarefaId -> Handler Html
+postDelTarR pid = do
+    runDB $ delete pid
+    redirect ListaTaR

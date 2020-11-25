@@ -34,13 +34,16 @@ getHomeR = defaultLayout $ do
             $maybe sessao <- sess
                 <li>
                     <a href=@{ProdutoR}>
-                        Cadastrar produtos da lista de compras
+                        Minha lista do supermecado
+                <li>
+                    <a href=@{ListaR}>
+                        Minha Lista de compras
                 <li>
                     <a href=@{TarefaR}>
                         Cadastrar uma nova tarefa
                 <li>
-                    <a href=@{ListaR}>
-                        Minha Lista de compras
+                    <a href=@{ListaTaR}>
+                        Minha Lista de Tarefas
                 <li>
                     <form action=@{LogoutR} method=post>
                         <input type="submit" value="Logout">

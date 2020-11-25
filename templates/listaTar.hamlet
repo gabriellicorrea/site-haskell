@@ -1,0 +1,26 @@
+<table>
+    <tread>
+        <tr>
+            Nome
+        <tr>
+            Descricao
+        <tr>
+        <tr>
+
+    <tbody>
+        $forall Entity pid tarefa <- tarefas
+            <tr>
+                <td>
+                    <a .nomeColorido href=@{DesctaR pid}>
+                        #{tarefaNome tarefa}
+                <td>
+                    #{tarefaDescricao tarefa}
+                <td>
+                    <a href=@{UpdTarR pid}>
+                            Editar
+                <td>
+                    <form action=@{DelTarR pid} method=post>
+                        <input type="submit" value="delete">
+                <td>
+                    <a href=@{HomeR}>
+                            Home

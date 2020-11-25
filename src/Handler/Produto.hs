@@ -70,7 +70,6 @@ getUpdProdR pid = do
     antigo <- runDB $ get404 pid
     auxProdutoR (UpdProdR pid) (Just antigo)
 
--- update from produto where id  pid set ...
 postUpdProdR :: ProdutoId -> Handler Html
 postUpdProdR pid = do
     ((result, _), _) <- runFormPost (formProduto Nothing)

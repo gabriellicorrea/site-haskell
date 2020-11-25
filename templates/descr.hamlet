@@ -4,13 +4,13 @@
     
     <form action=@{ComprarR pid} method="post">
         ^{widget}
-        <input .input type="submit" value="Compra">
+        <input type="submit" value="Compra">
     
     
     
     <li>
         <a href=@{ListaR}>
-            LISTAGEM DE TAREFAS
+            Suas compras
 
     
 

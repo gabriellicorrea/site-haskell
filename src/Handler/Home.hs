@@ -42,7 +42,7 @@ getHomeR = defaultLayout $ do
                             Home
                     <li role="presentation">
                         <a href=@{ProdutoR}>
-                            Lista do supermecado
+                            Cadastrar minhas compras
                     <li role="presentation">
                         <a href=@{ListaR}>
                             Lista de compras

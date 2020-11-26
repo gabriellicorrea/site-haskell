@@ -40,8 +40,11 @@ body {
     margin-left: calc(50% - 10rem);
   }
 
+  li{
+    padding:10px;
+  }
 a{
-  color: #693668
+  color: #693668;
 }
 
 a:hover{

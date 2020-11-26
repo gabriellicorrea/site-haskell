@@ -11,6 +11,8 @@ import Import
 import Text.Lucius
 import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3)
 import Tools
+import Database.Persist.Sql
+
 formProduto :: Maybe Produto -> Form Produto
 formProduto mp = renderBootstrap3 BootstrapBasicForm $ Produto 
     <$> areq textField (FieldSettings "Nome: " 
@@ -105,5 +107,10 @@ postUpdProdR pid = do
 
 postDelProdR :: ProdutoId -> Handler Html
 postDelProdR pid = do
-    runDB $ delete pid
+   -- let sql = "DELETE FROM compra WHERE compra.produtoid = ? "
+    --runDB $ rawSql sql [toPersistValue pid] :: Handler [(Entity Compra)]
+    let sql = "SELECT ?? FROM compra WHERE compra.produtoid = ?"
+    --compras <- runDB $ rawSql sql [toPersistValue pid] :: Handler [(Entity Compra)]
+    --runDB $ deleteWhere[CompraProdutoId ==. pid]
+    runDB $ deleteCascade pid
     redirect ListaR

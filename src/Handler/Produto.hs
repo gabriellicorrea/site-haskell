@@ -107,10 +107,6 @@ postUpdProdR pid = do
 
 postDelProdR :: ProdutoId -> Handler Html
 postDelProdR pid = do
-   -- let sql = "DELETE FROM compra WHERE compra.produtoid = ? "
-    --runDB $ rawSql sql [toPersistValue pid] :: Handler [(Entity Compra)]
     let sql = "SELECT ?? FROM compra WHERE compra.produtoid = ?"
-    --compras <- runDB $ rawSql sql [toPersistValue pid] :: Handler [(Entity Compra)]
-    --runDB $ deleteWhere[CompraProdutoId ==. pid]
     runDB $ deleteCascade pid
     redirect ListaR

@@ -23,8 +23,7 @@ getHomeR = defaultLayout $ do
     setTitle "Nova tarefa - Cadastre suas tarefas"
     addStylesheet (StaticR css_bootstrapmin_css)
     addStylesheet (StaticR css_styles_css)
-    addScriptRemote "https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    addScriptRemote "https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+   
     toWidgetHead [hamlet|
         <script src=@{StaticR js_ola_js}>
     |]
@@ -49,3 +48,5 @@ getHomeR = defaultLayout $ do
                             Entrar
                 
     |]
+    addScriptRemote "https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    addScriptRemote "https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"

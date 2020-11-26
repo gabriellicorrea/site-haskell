@@ -54,7 +54,7 @@ instance Yesod App where
                                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                                         <span class="navbar-toggler-icon">  
 
-                                    <div class="collapse navbar-collapse">
+                                    <div class="collapse navbar-collapse" id="navbarsExample04">
                                         <ul class="navbar-nav mr-auto">
                                             <li class="nav-item active mr-3">
                                                 <a class="nav-link" href=@{HomeR}>

@@ -1,11 +1,13 @@
-<ul>
-    <li> Nome da tarefa: #{tarefaNome tarefa}
-    <li> Descricao: #{tarefaDescricao tarefa}    
-    <li>
-        <a href=@{ListaTaR}>
-            Suas Tarefas!!
-
-    
+<div class="card mt-5">
+  <div class="card-header">
+    Tarefa
+  <div class="card-body">
+    <h5 class="card-title">
+        #{tarefaNome tarefa}
+    <p class="card-text">
+        #{tarefaDescricao tarefa}
+    <a href=@{ListaTaR} class="btn btn-primary">
+        Ir para tarefas
 
 
      

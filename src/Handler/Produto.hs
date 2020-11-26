@@ -12,27 +12,37 @@ import Text.Lucius
 import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3)
 import Tools
 formProduto :: Maybe Produto -> Form Produto
-formProduto mp = renderDivs $ Produto 
+formProduto mp = renderBootstrap3 BootstrapBasicForm $ Produto 
     <$> areq textField (FieldSettings "Nome: " 
                                         Nothing
                                         (Just "h21")
                                         Nothing
-                                        [("class", "minhaClasse")]) 
+                                        [("class", "form-control")]) 
                                         (fmap produtoNome mp)
-    <*> areq doubleField "Preco: " (fmap produtoValor mp)
+    <*> areq doubleField (FieldSettings "Preço: " 
+                                        Nothing
+                                        (Just "h21")
+                                        Nothing
+                                        [("class", "form-control")]) 
+                                        (fmap produtoValor mp)
 
 auxProdutoR :: Route App -> Maybe Produto -> Handler Html
 auxProdutoR rt mp = do
      (formWidget, _) <- generateFormPost (formProduto mp)
      defaultLayout $ do
-        addStylesheet (StaticR css_bootstrap_css)
+        setTitle "Nova tarefa - Cadastrar produto"
+        addStylesheet (StaticR css_bootstrapmin_css)
+        addStylesheet (StaticR css_styles_css)
+    
         toWidgetHead $(luciusFile "templates/descr.lucius")
         [whamlet|
         
             <form action=@{rt} method=post>
                 ^{formWidget}
-                <input type="submit"  value="OK">
+                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Salvar">
         |]
+        addScriptRemote "https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        addScriptRemote "https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 
 
 getProdutoR :: Handler Html
@@ -54,7 +64,13 @@ getDescR pid = do
     produto <- runDB $ get404 pid
     (widget, _) <- generateFormPost formQt
     defaultLayout $ do
+        setTitle "Nova tarefa - Adicionar nas minhas compras"
+        addStylesheet (StaticR css_bootstrapmin_css)
+        addStylesheet (StaticR css_styles_css) 
         $(whamletFile "templates/descr.hamlet")
+        addScriptRemote "https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        addScriptRemote "https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+
 
 
 getListaR :: Handler Html

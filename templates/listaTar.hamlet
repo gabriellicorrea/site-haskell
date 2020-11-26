@@ -1,12 +1,13 @@
-<table>
-    <tread>
+<h1 class="mt-4 text-center">
+    Minhas tarefas
+<table class="table table-striped mt-4">
+    <thead>
         <tr>
-            Nome
-        <tr>
-            Descricao
-        <tr>
-        <tr>
-
+            <th>
+                Nome
+            <th>
+                Descrição
+            <th>
     <tbody>
         $forall Entity pid tarefa <- tarefas
             <tr>
@@ -16,11 +17,11 @@
                 <td>
                     #{tarefaDescricao tarefa}
                 <td>
-                    <a href=@{UpdTarR pid}>
+                    <a href=@{UpdTarR pid} class="btn btn-secondary">
+                            <i class="fas fa-pen">
                             Editar
                 <td>
                     <form action=@{DelTarR pid} method=post>
-                        <input type="submit" value="delete">
-                <td>
-                    <a href=@{HomeR}>
-                            Home
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash-alt">
+                            Deletar

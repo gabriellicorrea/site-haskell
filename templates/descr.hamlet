@@ -1,18 +1,20 @@
-<ul>
-    <li> Nome: #{produtoNome produto}
-    <li> Preco: #{produtoValor produto}
-    
-    <form action=@{ComprarR pid} method="post">
+<div class="card mt-5">
+  <div class="card-header">
+    Produto
+  <div class="card-body">
+    <h5 class="card-title">
+        #{produtoNome produto}
+    <p class="card-text">
+        #{produtoValor produto}
+     <form action=@{ComprarR pid} method="post">
         ^{widget}
-        <input type="submit" value="Compra">
-    
-    
-    
-    <li>
-        <a href=@{ListaR}>
-            Suas compras
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-shopping-cart">
+            Adicionar nas compras
+    <a href=@{ListComprarR} class="btn btn-primary">
+        Ir para minhas compras
 
-    
+
 
 
      

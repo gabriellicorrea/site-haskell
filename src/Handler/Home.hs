@@ -24,43 +24,27 @@ getHomeR = defaultLayout $ do
     addStylesheet (StaticR css_bootstrapmin_css)
     addStylesheet (StaticR css_styles_css)
     addScriptRemote "https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    addScriptRemote "https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
     toWidgetHead [hamlet|
         <script src=@{StaticR js_ola_js}>
     |]
     sess <- lookupSession "_ID"
     [whamlet|
-        <h1>
+        <h1 class="text-center">
             Gerenciador de Tarefas
         <br>
-        <img src=@{StaticR imgs_NovaTarefa_png}><br>
+        <img src=@{StaticR imgs_NovaTarefa_png} class="img-logo"><br>
 
-        <ul>
+        
             $maybe sessao <- sess
-                <ul class="nav nav-tabs">
-                    <li role="presentation" class="active">
-                        <a href=@{HomeR}>
-                            Home
-                    <li role="presentation">
-                        <a href=@{ProdutoR}>
-                            Lista do supermecado
-                    <li role="presentation">
-                        <a href=@{ListaR}>
-                            Lista de compras
-                    <li role="presentation">
-                        <a href=@{TarefaR}>
-                            Cadastrar nova tarefa
-                    <li role="presentation">
-                        <a href=@{ListaTaR}>
-                            Minhas tarefas
-                    <li role="presentation">
-                        <form action=@{LogoutR} method=post>
-                            <input type="submit" value="Logout">
+               <h2>Teste</h2>
             $nothing
-                <li>
-                    <a href=@{UsuarioR}>
-                        Cadastrar
-                <li>
-                    <a href=@{LoginR}>
-                        Entrar
+                <ul>
+                    <li>
+                        <a href=@{UsuarioR}>
+                            Cadastrar
+                    <li>
+                        <a href=@{LoginR}>
+                            Entrar
                 
     |]

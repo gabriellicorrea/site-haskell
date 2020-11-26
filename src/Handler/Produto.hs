@@ -36,8 +36,8 @@ auxProdutoR rt mp = do
     
         toWidgetHead $(luciusFile "templates/descr.lucius")
         [whamlet|
-        
-            <form action=@{rt} method=post>
+            <h1 class="text-center mt-5">Adicionar produto</h1>
+            <form action=@{rt} method=post class="mt-5">
                 ^{formWidget}
                 <input type="submit" class="btn btn-lg btn-primary btn-block" value="Salvar">
         |]
@@ -77,8 +77,14 @@ getListaR :: Handler Html
 getListaR = do
     produtos <- runDB $ selectList [] [Desc ProdutoValor]
     defaultLayout $ do
+        setTitle "Nova tarefa - Lista de produtos"
+        addStylesheet (StaticR css_bootstrapmin_css)
+        addStylesheet (StaticR css_styles_css)
         toWidgetHead $(luciusFile "templates/listar.lucius")
-        $(whamletFile "templates/listar.hamlet")    
+        $(whamletFile "templates/listar.hamlet") 
+        addScriptRemote "https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        addScriptRemote "https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+   
         
 
 

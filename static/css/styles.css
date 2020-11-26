@@ -39,6 +39,10 @@ body {
     margin-left: calc(50% - 10rem);
   }
 
+  .img-logo-inicio{
+    width: 20rem;
+  }
+
 a{
   color: #693668
 }

@@ -30,21 +30,22 @@ getHomeR = defaultLayout $ do
     |]
     sess <- lookupSession "_ID"
     [whamlet|
-        <h1 class="text-center">
-            Gerenciador de Tarefas
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <img src=@{StaticR imgs_NovaTarefa_png} class="img-logo-inicio"><br>
+            <h1 class="display-4 font-weight-normal" hidden>Gerenciador de tarefas
+            <p class="lead font-weight-normal">Planeje sua vida, gerencie suas tarefas de forma mais rápida e prática!
         <br>
-        <img src=@{StaticR imgs_NovaTarefa_png} class="img-logo"><br>
-
+      
         
             $maybe sessao <- sess
-               <h2>Teste</h2>
+                <a class="btn btn-outline-secondary" href=@{TarefaR}>Cadastre uma tarefa</a>
             $nothing
-                <ul>
-                    <li>
-                        <a href=@{UsuarioR}>
+                <a href=@{UsuarioR} class="btn btn-outline-secondary">
                             Cadastrar
-                    <li>
-                        <a href=@{LoginR}>
+                <p>
+                    ou 
+                <a href=@{LoginR} class="btn btn-outline-secondary">
                             Entrar
                 
     |]

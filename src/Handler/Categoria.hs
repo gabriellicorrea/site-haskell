@@ -27,7 +27,7 @@ auxCategoriaR rt mp = do
         [whamlet|
             <form action=@{rt} method=post>
                 ^{formWidget}
-                <input type="submit"  value="OK">
+                <input type="submit"  value="Salvar">
         |]
 
    

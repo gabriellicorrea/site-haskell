@@ -3,10 +3,10 @@
     Produto
   <div class="card-body">
     <h5 class="card-title">
-        #{produtoNome produto}
+        Produto: #{produtoNome produto}
     <p class="card-text">
-        #{produtoValor produto}
-     <form action=@{ComprarR pid} method="post">
+        Preço: R$ #{produtoValor produto}
+     <form action=@{ComprarR pid} method="post" class="mt-4">
         ^{widget}
         <button type="submit" class="btn btn-success">
             <i class="fas fa-shopping-cart">

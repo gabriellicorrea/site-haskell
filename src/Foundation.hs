@@ -60,28 +60,28 @@ instance Yesod App where
                                                 <a class="nav-link" href=@{HomeR}>
                                                     Home 
                                             
-                                            <li class="nav-item dropdown mr-3">
+                                            <li class="nav-item dropdown mr-3" >
                                                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     Supermercado
-                                                    <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                                        <a class="dropdown-item" href=@{ProdutoR}>
-                                                            Adicionar produto
-                                                        <a class="dropdown-item" href=@{ListaR}>
-                                                            Lista de produtos
-                                                        <a class="dropdown-item" href=@{ListComprarR}>
-                                                            Meu carrinho
+                                                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                                    <a class="dropdown-item" href=@{ProdutoR}>
+                                                        Adicionar produto
+                                                    <a class="dropdown-item" href=@{ListaR}>
+                                                        Lista de produtos
+                                                    <a class="dropdown-item" href=@{ListComprarR}>
+                                                        Meu carrinho
 
 
                                             <li class="nav-item dropdown mr-3">
                                                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     Tarefas
-                                                    <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                                        <a class="dropdown-item" href=@{TarefaR}>
-                                                            Adicionar tarefa
-                                                        <a class="dropdown-item" href=@{ListaTaR}>
-                                                           Minhas tarefas
+                                                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                                    <a class="dropdown-item" href=@{TarefaR}>
+                                                        Adicionar tarefa
+                                                    <a class="dropdown-item" href=@{ListaTaR}>
+                                                        Minhas tarefas
                                                        
-                                            <form action=@{LogoutR} method=post class="form-inline my-2 my-md-0 ml-md-4 float-right">
+                                            <form action=@{LogoutR} method=post class="form-inline my-2 my-md-0 ml-md-4 justify-content-end">
                                                 <button type="submit" class="btn btn-danger">
                                                     <i class="fas fa-sign-out-alt">
                                                     Logout 
